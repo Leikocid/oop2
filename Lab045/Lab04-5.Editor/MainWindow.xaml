@@ -5,89 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab04_5.Editor"
         mc:Ignorable="d"
-        Title="Текстовый редактор" AllowDrop="True" Height="550" Width="700"  Cursor="Pen">
+        Title="Текстовый редактор" AllowDrop="True" Height="550" Width="700" Icon="Resources/icons8-video-editing-50.png">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Language_EN.xaml"/>
-                <ResourceDictionary Source="/Resources/BlackStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <!--
-    <Window.CommandBindings>
+   <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
         <CommandBinding Command="ApplicationCommands.Save" Executed="Save_Executed" />
         <CommandBinding Command="ApplicationCommands.New" Executed="New_Executed" />
-        <CommandBinding Command="ApplicationCommands.Delete" Executed="Delete_Executed" />
         <CommandBinding Command="ApplicationCommands.Close" Executed="Close_Executed" />
     </Window.CommandBindings>
-    -->
-
-    <Grid Style="{StaticResource Dracula}">
+ 
+    <Grid Style="{StaticResource SweetDracula}">
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" Width="Auto" Style="{StaticResource Dracula}">
-            <MenuItem Header="{DynamicResource _File}" x:Name="File">
-                <MenuItem Header="{DynamicResource _New}" Command="ApplicationCommands.New"/>
-                <MenuItem Header="{DynamicResource _Save}" Command="ApplicationCommands.Save"/>
-                <MenuItem Header="{DynamicResource _Open}"  Command="ApplicationCommands.Open"/>
-            </MenuItem>
-            <MenuItem Header="{DynamicResource _Edit}" x:Name="Edit">
-                <MenuItem Header="{DynamicResource _Undo}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Undo"/>
-                <MenuItem Header="{DynamicResource _Redo}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Redo"/>
-                <MenuItem Header="{DynamicResource _Cut}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Cut"/>
-                <MenuItem Header="{DynamicResource _Copy}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Copy"/>
-                <MenuItem Header="{DynamicResource _Paste}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Paste"/>
-            </MenuItem>
-            <!--
-            <MenuItem Header="{DynamicResource _Font}" x:Name="Font" Click=" Font_Executed"/>
-            <MenuItem Header="{DynamicResource _Color}" x:Name="Colorr" Click="Color_Executed"/>
-            -->
-            <MenuItem Header="{DynamicResource _Lang}" x:Name="Lang">
-                <MenuItem Header="{DynamicResource _Ru}" Click="SetRussian"/>
-                <MenuItem Header="{DynamicResource _Eng}" Click="SetEnglish"/>
-            </MenuItem>
-<!--
-            <ToolBar x:Name="toolBar" AllowDrop="True" Grid.Row="0" Height="Auto" Style="{StaticResource Dracula}">
-                <Button x:Name="_Open" ToolTip="Open" Command="ApplicationCommands.Open">
-                    <Image Source="resources/folder.png" Width="28" Height="28" />
+        <StackPanel>
+            <Menu Grid.Row="0" Style="{StaticResource SweetDracula}">
+                <MenuItem Header="{DynamicResource _File}" x:Name="File">
+                    <MenuItem Header="{DynamicResource _New}" Command="ApplicationCommands.New"/>
+                    <MenuItem Header="{DynamicResource _Open}"  Command="ApplicationCommands.Open"/>
+                    <MenuItem Header="{DynamicResource _Save}" Command="ApplicationCommands.Save"/>
+                    <Separator />
+                    <MenuItem Header="{DynamicResource _Close}" Command="ApplicationCommands.Close"/>
+                </MenuItem>
+                <MenuItem Header="{DynamicResource _Edit}" x:Name="Edit">
+                    <MenuItem Header="{DynamicResource _Undo}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Undo"/>
+                    <MenuItem Header="{DynamicResource _Redo}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Redo"/>
+                    <MenuItem Header="{DynamicResource _Cut}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Cut"/>
+                    <MenuItem Header="{DynamicResource _Copy}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Copy"/>
+                    <MenuItem Header="{DynamicResource _Paste}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Paste"/>
+                </MenuItem>
+                <MenuItem Header="{DynamicResource _Font}" x:Name="Font" Click="Font_Click" />
+                <MenuItem Header="{DynamicResource _Color}" x:Name="Color" Click="Color_Click" />
+                <MenuItem Header="{DynamicResource _Lang}" x:Name="Lang">
+                    <MenuItem Header="{DynamicResource _Ru}" Click="SetRussian"/>
+                    <MenuItem Header="{DynamicResource _Eng}" Click="SetEnglish"/>
+                </MenuItem>
+            </Menu>
+
+            <ToolBar x:Name="toolBar" AllowDrop="True" Grid.Row="0" Height="Auto" Style="{StaticResource SweetDracula}">
+                <Button x:Name="_New" ToolTip="New" Command="ApplicationCommands.New" Style="{StaticResource SweetDracula}">
+                    <Image Source="Resources/icons8-new-50.png" Width="28" Height="28"/>
                 </Button>
-                <Button x:Name="_Save" ToolTip="Save" Command="ApplicationCommands.Save">
-                    <Image Source="resources/disk.png" Width="28" Height="28" />
+                <Button x:Name="_Open" ToolTip="Open" Command="ApplicationCommands.Open" Style="{StaticResource SweetDracula}">
+                    <Image Source="Resources/icons8-opened-folder-50.png" Width="28" Height="28"/>
+                </Button>
+                <Button x:Name="_Save" ToolTip="Save" Command="ApplicationCommands.Save" Style="{StaticResource SweetDracula}">
+                    <Image Source="Resources/icons8-save-as-50.png" Width="28" Height="28" />
                 </Button>
                 <Separator />
-                <ToggleButton Command="EditingCommands.ToggleBold" Name="btnBold">
-                    <Image Source="resources/text_bold.png" Width="28" Height="28" />
+                <ToggleButton Command="EditingCommands.ToggleBold" Name="btnBold" Style="{StaticResource SweetDracula}">
+                    <Image Source="Resources/icons8-bold-filled-50.png" Width="28" Height="28" />
                 </ToggleButton>
-                <ToggleButton Command="EditingCommands.ToggleItalic" Name="btnItalic">
-                    <Image Source="resources/text_italic.png" Width="28" Height="28" />
+                <ToggleButton Command="EditingCommands.ToggleItalic" Name="btnItalic" Style="{StaticResource SweetDracula}">
+                    <Image Source="Resources/icons8-italic-filled-50.png" Width="28" Height="28" />
                 </ToggleButton>
-                <ToggleButton Command="EditingCommands.ToggleUnderline" Name="btnUnderline">
-                    <Image Source="resources/text_underline.png" Width="28" Height="28" />
+                <ToggleButton Command="EditingCommands.ToggleUnderline" Name="btnUnderline" Style="{StaticResource SweetDracula}">
+                    <Image Source="Resources/icons8-underline-filled-50.png" Width="28" Height="28" />
                 </ToggleButton>
                 <Separator />
-                <ComboBox Name="cmbFontFamily" Width="150" SelectionChanged="cmbFontFamily_SelectionChanged"/>
+                <Border Style="{StaticResource SweetDracula}">
+                    <ComboBox Name="cmbFontFamily" Width="200" FontSize="18" VerticalContentAlignment="Center" Height="28" Style="{StaticResource SweetDracula}" SelectionChanged="CmbFontFamily_SelectionChanged"/>
+                </Border>
                 <Slider x:Name="sldFontSize" Value="16" Minimum="4" Maximum="72" Width="100" 
-                        ValueChanged="sldFontSize_ValueChanged" IsSnapToTickEnabled="True" 
-                        TickFrequency="2" TickPlacement="Both" />
-                <Label Content="{Binding ElementName=sldFontSize, Path=Value}"/>
+                        ValueChanged="SldFontSize_ValueChanged" IsSnapToTickEnabled="True" 
+                        TickFrequency="2" TickPlacement="Both" Style="{StaticResource SweetDracula}" />
+                <Label Content="{Binding ElementName=sldFontSize, Path=Value}" Style="{StaticResource SweetDracula}"/>
             </ToolBar>
-            -->
-        </Menu>
-        
-        <RichTextBox x:Name="rtbEditor" Grid.Row="1" Style="{StaticResource Dracula}" TextChanged="RtbEditor_TextChanged" SelectionChanged="RtbEditor_SelectionChanged" >
+        </StackPanel>
+
+        <RichTextBox x:Name="rtbEditor" Grid.Row="1" Style="{StaticResource SweetDracula}" TextChanged="RtbEditor_TextChanged"  AllowDrop="True" SelectionChanged="RtbEditor_SelectionChanged" Cursor="Pen">
             <RichTextBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{DynamicResource _Cut}" Command="Cut"/>
                     <MenuItem Header="{DynamicResource _Copy}" Command="Copy"/>
                     <MenuItem Header="{DynamicResource _Paste}" Command="Paste"/>
-                    <MenuItem Header="{DynamicResource _Delete}" Command="ApplicationCommands.Delete"/>
-                    <MenuItem Header="{DynamicResource _Close}" Command="ApplicationCommands.Close"/>
+                    <MenuItem Header="{DynamicResource _Close}" Command="ApplicationCommands.New"/>
                 </ContextMenu>
             </RichTextBox.ContextMenu>
             <RichTextBox.LayoutTransform>
@@ -96,23 +98,22 @@
                     ScaleY="{Binding ElementName=zoom,Path=Value}"></ScaleTransform>
             </RichTextBox.LayoutTransform>
         </RichTextBox>
-        <!--
-        <Grid AllowDrop="True" Grid.Row="2">
+
+        <Grid AllowDrop="True" Grid.Row="2" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.5*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2.5*"/>
             </Grid.ColumnDefinitions>
-            <StatusBar Grid.Column="0">
-                <Label Content="{DynamicResource _Symbols}"/>
-                <TextBox Name="status1" Width="30" />
-                <Label Content="{DynamicResource _Words}"/>
-                <TextBox Name="status2" Width="30" />
+            <StatusBar Grid.Column="0" Style="{StaticResource SweetDracula}">
+                <Label Content="{DynamicResource _Scale}" Style="{StaticResource SweetDracula}"/>
+                <Slider x:Name="zoom" Minimum="0.3" Maximum="5" Value="1" Width="100" Style="{StaticResource SweetDracula}"/>
             </StatusBar>
-            <StatusBar Grid.Column="1"  HorizontalAlignment="Right">
-                <Label Content="{DynamicResource _Scale}"/>
-                <Slider x:Name="zoom" Minimum="0.3" Maximum="5" Value="1" Width="100"/>
+            <StatusBar Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource SweetDracula}">
+                <Label Content="{DynamicResource _Symbols}" Style="{StaticResource SweetDracula}"/>
+                <Label Name="status1" Style="{StaticResource SweetDracula}" />
+                <Label Content="{DynamicResource _Words}" Style="{StaticResource SweetDracula}"/>
+                <Label Name="status2" Style="{StaticResource SweetDracula}" />
             </StatusBar>
-        </Grid>
--->
+         </Grid>
     </Grid>
 </Window>

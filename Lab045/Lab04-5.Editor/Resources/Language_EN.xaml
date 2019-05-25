@@ -4,8 +4,8 @@
 
     <v:String x:Key="_File">File</v:String>
     <v:String x:Key="_New">New</v:String>
-    <v:String x:Key="_Save">Save</v:String>
     <v:String x:Key="_Open">Open</v:String>
+    <v:String x:Key="_Save">Save</v:String>
 
     <v:String x:Key="_Edit">Edit</v:String>
     <v:String x:Key="_Undo">Undo</v:String>
@@ -25,7 +25,7 @@
     <v:String x:Key="_Ru">Russian</v:String>
 
     <v:String x:Key="_Symbols">Count of symbols: </v:String>
-    <v:String x:Key="_Words"> and words:</v:String>
+    <v:String x:Key="_Words">Count of words:</v:String>
 
-    <v:String x:Key="_Scale">scale:</v:String>
+    <v:String x:Key="_Scale">Editor Scale:</v:String>
 </ResourceDictionary>

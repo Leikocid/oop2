@@ -25,7 +25,7 @@
     <v:String x:Key="_Ru">Русский</v:String>
 
     <v:String x:Key="_Symbols">Количество символов:</v:String>
-    <v:String x:Key="_Words"> и слов:</v:String>
+    <v:String x:Key="_Words">Количество слов:</v:String>
 
     <v:String x:Key="_Scale">масштаб:</v:String>
 </ResourceDictionary>
