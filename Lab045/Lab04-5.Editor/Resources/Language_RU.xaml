@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <v:String x:Key="_File">Файл</v:String>
+    <v:String x:Key="_New">Новый</v:String>
+    <v:String x:Key="_Save">Сохранить</v:String>
+    <v:String x:Key="_Open">Открыть</v:String>
+
+    <v:String x:Key="_Edit">Правка</v:String>
+    <v:String x:Key="_Undo">Отменить</v:String>
+    <v:String x:Key="_Redo">Вернуть</v:String>
+    <v:String x:Key="_Cut">Вырезать</v:String>
+    <v:String x:Key="_Copy">Копировать</v:String>
+    <v:String x:Key="_Paste">Вставить</v:String>
+
+    <v:String x:Key="_Close">Закрыть</v:String>
+    <v:String x:Key="_Delete">Удалить</v:String>
+
+    <v:String x:Key="_Font">Шрифт</v:String>
+    <v:String x:Key="_Color">Цвет</v:String>
+
+    <v:String x:Key="_Lang">Язык</v:String>
+    <v:String x:Key="_Eng">Английский</v:String>
+    <v:String x:Key="_Ru">Русский</v:String>
+
+    <v:String x:Key="_Symbols">Количество символов:</v:String>
+    <v:String x:Key="_Words"> и слов:</v:String>
+
+    <v:String x:Key="_Scale">масштаб:</v:String>
+</ResourceDictionary>

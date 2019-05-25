@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <v:String x:Key="_File">File</v:String>
+    <v:String x:Key="_New">New</v:String>
+    <v:String x:Key="_Save">Save</v:String>
+    <v:String x:Key="_Open">Open</v:String>
+
+    <v:String x:Key="_Edit">Edit</v:String>
+    <v:String x:Key="_Undo">Undo</v:String>
+    <v:String x:Key="_Redo">Redo</v:String>
+    <v:String x:Key="_Cut">Cut</v:String>
+    <v:String x:Key="_Copy">Copy</v:String>
+    <v:String x:Key="_Paste">Paste</v:String>
+
+    <v:String x:Key="_Close">Close</v:String>
+    <v:String x:Key="_Delete">Delete</v:String>
+
+    <v:String x:Key="_Font">Font</v:String>
+    <v:String x:Key="_Color">Color</v:String>
+
+    <v:String x:Key="_Lang">Language</v:String>
+    <v:String x:Key="_Eng">English</v:String>
+    <v:String x:Key="_Ru">Russian</v:String>
+
+    <v:String x:Key="_Symbols">Count of symbols: </v:String>
+    <v:String x:Key="_Words"> and words:</v:String>
+
+    <v:String x:Key="_Scale">scale:</v:String>
+</ResourceDictionary>
