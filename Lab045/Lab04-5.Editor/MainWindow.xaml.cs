@@ -48,7 +48,6 @@ namespace Lab04_5.Editor {
             }
         }
 
-
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e) {
             try {
                 OpenFileDialog dlg = new OpenFileDialog {
@@ -151,7 +150,6 @@ namespace Lab04_5.Editor {
         private void RtbEditor_TextChanged(object sender, TextChangedEventArgs e) {
             this.status1.Content = GetLength1(this.rtbEditor);
             this.status2.Content = GetLength2(this.rtbEditor);
-
         }
 
         private string GetLength1(RichTextBox rtb) {
@@ -208,17 +206,19 @@ namespace Lab04_5.Editor {
         }
 
         private void RtbEditor_SelectionChanged(object sender, RoutedEventArgs e) {
-            object temp = rtbEditor.Selection.GetPropertyValue(Inline.FontWeightProperty);
-            btnBold.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontWeights.Bold));
-            temp = rtbEditor.Selection.GetPropertyValue(Inline.FontStyleProperty);
-            btnItalic.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontStyles.Italic));
-            temp = rtbEditor.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
-            btnUnderline.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(TextDecorations.Underline));
+            try {
+                object temp = rtbEditor.Selection.GetPropertyValue(Inline.FontWeightProperty);
+                btnBold.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontWeights.Bold));
+                temp = rtbEditor.Selection.GetPropertyValue(Inline.FontStyleProperty);
+                btnItalic.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontStyles.Italic));
+                temp = rtbEditor.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+                btnUnderline.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(TextDecorations.Underline));
 
-            temp = rtbEditor.Selection.GetPropertyValue(Inline.FontFamilyProperty);
-            cmbFontFamily.SelectedItem = temp;
-            temp = rtbEditor.Selection.GetPropertyValue(Inline.FontSizeProperty);
-            sldFontSize.Value = Convert.ToInt32(temp);
+                temp = rtbEditor.Selection.GetPropertyValue(Inline.FontFamilyProperty);
+                cmbFontFamily.SelectedItem = temp;
+                temp = rtbEditor.Selection.GetPropertyValue(Inline.FontSizeProperty);
+                sldFontSize.Value = Convert.ToInt32(temp);
+            } catch (Exception ex) { }
         }
     }
 }

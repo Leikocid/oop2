@@ -28,8 +28,8 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <StackPanel>
-            <Menu Grid.Row="0" Style="{StaticResource SweetDracula}">
+        <StackPanel Grid.Row="0">
+            <Menu Style="{StaticResource SweetDracula}">
                 <MenuItem Header="{DynamicResource _File}" x:Name="File">
                     <MenuItem Header="{DynamicResource _New}" Command="ApplicationCommands.New"/>
                     <MenuItem Header="{DynamicResource _Open}"  Command="ApplicationCommands.Open"/>
@@ -52,7 +52,7 @@
                 </MenuItem>
             </Menu>
 
-            <ToolBar x:Name="toolBar" AllowDrop="True" Grid.Row="0" Height="Auto" Style="{StaticResource SweetDracula}">
+            <ToolBar x:Name="toolBar" Grid.Row="0" Height="Auto" Style="{StaticResource SweetDracula}">
                 <Button x:Name="_New" ToolTip="New" Command="ApplicationCommands.New" Style="{StaticResource SweetDracula}">
                     <Image Source="Resources/icons8-new-50.png" Width="28" Height="28"/>
                 </Button>
@@ -99,7 +99,7 @@
             </RichTextBox.LayoutTransform>
         </RichTextBox>
 
-        <Grid AllowDrop="True" Grid.Row="2" >
+        <Grid Grid.Row="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2.5*"/>
