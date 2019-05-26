@@ -21,8 +21,9 @@ namespace Lab06.Editor {
             cmbFontFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
             rtbEditor.AddHandler(RichTextBox.DragOverEvent, new DragEventHandler(RtbEditor_Drag), true);
             rtbEditor.AddHandler(RichTextBox.DropEvent, new DragEventHandler(RtbEditor_Drop), true);
+            rtbEditor.Focus();
             Theme.ItemsSource = new List<string> { "Light", "Dark", "CuteDracula" };
-            Theme.SelectedItem = "CuteDracula";
+            Theme.SelectedItem = "Dark";
 
             InitializeNew();
         }
@@ -235,13 +236,17 @@ namespace Lab06.Editor {
                 imgBold.Source = new BitmapImage(new Uri("Resources/icons8-bold-50-dark.png", UriKind.Relative));
                 imgItalic.Source = new BitmapImage(new Uri("Resources/icons8-italic-50-dark.png", UriKind.Relative));
                 imgUnderline.Source = new BitmapImage(new Uri("Resources/icons8-underline-50-dark.png", UriKind.Relative));
-           } else {
+                imgUndo.Source = new BitmapImage(new Uri("Resources/icons8-undo-50-dark.png", UriKind.Relative));
+                imgRedo.Source = new BitmapImage(new Uri("Resources/icons8-redo-50-dark.png", UriKind.Relative));
+            } else {
                 imgNew.Source = new BitmapImage(new Uri("Resources/icons8-new-50.png", UriKind.Relative));
                 imgOpen.Source = new BitmapImage(new Uri("Resources/icons8-open-50.png", UriKind.Relative));
                 imgSave.Source = new BitmapImage(new Uri("Resources/icons8-save-50.png", UriKind.Relative));
                 imgBold.Source = new BitmapImage(new Uri("Resources/icons8-bold-50.png", UriKind.Relative));
                 imgItalic.Source = new BitmapImage(new Uri("Resources/icons8-italic-50.png", UriKind.Relative));
                 imgUnderline.Source = new BitmapImage(new Uri("Resources/icons8-underline-50.png", UriKind.Relative));
+                imgUndo.Source = new BitmapImage(new Uri("Resources/icons8-undo-50.png", UriKind.Relative));
+                imgRedo.Source = new BitmapImage(new Uri("Resources/icons8-redo-50.png", UriKind.Relative));
             }
             ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
             Application.Current.Resources.MergedDictionaries.Add(resourceDict);

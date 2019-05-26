@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab06.Editor"
         mc:Ignorable="d"
-        Title="Текстовый редактор" AllowDrop="True" Height="550" Width="800" Icon="Resources/icons8-video-editing-50.png" Style="{DynamicResource WindowStyle}">
-   <Window.CommandBindings>
+        Title="Текстовый редактор" AllowDrop="True" Height="550" Width="900" Icon="Resources/icons8-video-editing-50.png" Style="{DynamicResource WindowStyle}">
+    <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
         <CommandBinding Command="ApplicationCommands.Save" Executed="Save_Executed" />
         <CommandBinding Command="ApplicationCommands.New" Executed="New_Executed" />
         <CommandBinding Command="ApplicationCommands.Close" Executed="Close_Executed" />
     </Window.CommandBindings>
- 
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
@@ -34,6 +34,7 @@
                 <MenuItem Header="{DynamicResource _Edit}" x:Name="Edit">
                     <MenuItem Header="{DynamicResource _Undo}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Undo"/>
                     <MenuItem Header="{DynamicResource _Redo}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Redo"/>
+                    <Separator/>
                     <MenuItem Header="{DynamicResource _Cut}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Cut"/>
                     <MenuItem Header="{DynamicResource _Copy}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Copy"/>
                     <MenuItem Header="{DynamicResource _Paste}" CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Paste"/>
@@ -47,24 +48,31 @@
             </Menu>
 
             <ToolBar x:Name="toolBar" Height="Auto" Style="{DynamicResource ToolBarStyle}">
-                <Button x:Name="_New" ToolTip="New" Command="ApplicationCommands.New" Style="{DynamicResource ButtonStyle}">
+                <Button x:Name="_New" ToolTip="New" Command="ApplicationCommands.New" Style="{DynamicResource ButtonStyle}" MinWidth="0">
                     <Image Name="imgNew" Source="Resources/icons8-new-50.png" Width="28" Height="28"/>
                 </Button>
                 <Button x:Name="_Open" ToolTip="Open" Command="ApplicationCommands.Open" Style="{DynamicResource ButtonStyle}">
                     <Image Name="imgOpen" Source="Resources/icons8-open-50.png" Width="28" Height="28"/>
                 </Button>
                 <Button x:Name="_Save" ToolTip="Save" Command="ApplicationCommands.Save" Style="{DynamicResource ButtonStyle}">
-                    <Image Name="imgSave" Source="Resources/icons8-save-50.png" Width="28" Height="28" />
+                    <Image Name="imgSave" Source="Resources/icons8-save-50.png" Width="28" Height="28"/>
+                </Button>
+                <Separator Margin="5"/>
+                <Button CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Undo" Name="btnUndo" Style="{DynamicResource ButtonStyle}">
+                    <Image Name="imgUndo" Source="Resources/icons8-undo-50.png" Width="28" Height="28"/>
+                </Button>
+                <Button CommandTarget="{Binding ElementName=this.rtbEditor}" Command="Redo" Name="btnRedo" Style="{DynamicResource ButtonStyle}">
+                    <Image Name="imgRedo" Source="Resources/icons8-redo-50.png" Width="28" Height="28"/>
                 </Button>
                 <Separator Margin="5"/>
                 <ToggleButton Command="EditingCommands.ToggleBold" Name="btnBold" Style="{DynamicResource ToggleButtonStyle}">
-                    <Image Name="imgBold" Source="Resources/icons8-bold-50.png" Width="28" Height="28" />
+                    <Image Name="imgBold" Source="Resources/icons8-bold-50.png" Width="28" Height="28"/>
                 </ToggleButton>
                 <ToggleButton Command="EditingCommands.ToggleItalic" Name="btnItalic" Style="{DynamicResource ToggleButtonStyle}">
-                    <Image Name="imgItalic" Source="Resources/icons8-italic-50.png" Width="28" Height="28" />
+                   <Image Name="imgItalic" Source="Resources/icons8-italic-50.png" Width="28" Height="28"/>
                 </ToggleButton>
                 <ToggleButton Command="EditingCommands.ToggleUnderline" Name="btnUnderline" Style="{DynamicResource ToggleButtonStyle}">
-                    <Image Name="imgUnderline" Source="Resources/icons8-underline-50.png" Width="28" Height="28" />
+                    <Image Name="imgUnderline" Source="Resources/icons8-underline-50.png" Width="28" Height="28"/>
                 </ToggleButton>
                 <Separator Margin="5"/>
                 <Border>
@@ -75,7 +83,7 @@
                         TickFrequency="2" TickPlacement="Both" Style="{DynamicResource SliderStyle}"/>
                 <Label Content="{Binding ElementName=sldFontSize, Path=Value}" Style="{DynamicResource LabelStyle}"/>
                 <Separator Margin="5"/>
-                <Label VerticalAlignment="Center" Content="{DynamicResource _Theme}"/>
+                <Label VerticalAlignment="Center" Content="{DynamicResource _Theme}" Style="{DynamicResource LabelStyle}"/>
                 <Border>
                     <ComboBox x:Name="Theme" MinWidth="170" FontSize="16" Height="28" Style="{DynamicResource ComboBoxStyle}" ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="Theme_SelectionChanged" BorderBrush="#FFEAEA07" />
                 </Border>
@@ -113,6 +121,6 @@
                 <Label Content="{DynamicResource _Words}" Style="{StaticResource LabelStyle}"/>
                 <Label Name="status2" Style="{StaticResource LabelStyle}" />
             </StatusBar>
-         </Grid>
+        </Grid>
     </Grid>
 </Window>

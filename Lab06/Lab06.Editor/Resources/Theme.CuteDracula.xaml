@@ -9,19 +9,107 @@
         <Setter Property="FontFamily" Value="Verdana"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="BlueViolet"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=sldFontSize, Path=Value}" Value="72">
+                <Setter Property="Control.Background" Value="LightGray"/>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
     <Style x:Key="ToolBarStyle" TargetType="ToolBar">
         <Setter Property="Background" Value="White"/>
     </Style>
     <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="FontFamily" Value="Verdana"/>
-        <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="BlueViolet"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <RadialGradientBrush>
+                    <GradientStop Color="BlueViolet"/>
+                    <GradientStop Color="White" Offset="0" />
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}" Margin="3">
+                        <ContentPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Background.GradientStops[1].Offset" Duration="0:0:0.3" To="1.5"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Background.GradientStops[1].Offset" Duration="0:0:0.3" To="0"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsPressed" Value="True" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.GradientStops[1].Color" To="Red" AutoReverse="True" Duration="0:0:0.4" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.ExitActions>
+            </MultiTrigger>
+        </Style.Triggers>
     </Style>
     <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
         <Setter Property="FontFamily" Value="Verdana"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="BlueViolet"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <RadialGradientBrush>
+                    <GradientStop Color="BlueViolet"/>
+                    <GradientStop Color="White" Offset="0" />
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid Background="{TemplateBinding Background}" Margin="3">
+                        <ContentPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Background.GradientStops[1].Offset" Duration="0:0:0.3" To="1.5"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Background.GradientStops[1].Offset" Duration="0:0:0.3" To="0"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
         <Setter Property="FontFamily" Value="Verdana"/>

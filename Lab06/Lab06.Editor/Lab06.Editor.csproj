@@ -135,5 +135,11 @@
     <Resource Include="Resources\icons8-save-50-dark.png" />
     <Resource Include="Resources\icons8-underline-50-dark.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-redo-50-dark.png" />
+    <Resource Include="Resources\icons8-redo-50.png" />
+    <Resource Include="Resources\icons8-undo-50-dark.png" />
+    <Resource Include="Resources\icons8-undo-50.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,6 +9,11 @@
         <Setter Property="FontFamily" Value="Verdana"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="Black"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=sldFontSize, Path=Value}" Value="72">
+                <Setter Property="Control.Background" Value="LightGray"/>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
     <Style x:Key="ToolBarStyle" TargetType="ToolBar">
         <Setter Property="Background" Value="White"/>
