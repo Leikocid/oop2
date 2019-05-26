@@ -25,8 +25,10 @@
     <v:String x:Key="_Eng">English</v:String>
     <v:String x:Key="_Ru">Russian</v:String>
 
-    <v:String x:Key="_Symbols">Count of symbols: </v:String>
-    <v:String x:Key="_Words">Count of words:</v:String>
+    <v:String x:Key="_Symbols">Symbol count: </v:String>
+    <v:String x:Key="_Words">Word count:</v:String>
 
     <v:String x:Key="_Scale">Editor Scale:</v:String>
+    <v:String x:Key="_Theme">Theme</v:String>
+
 </ResourceDictionary>

@@ -1,19 +1,11 @@
-﻿<Window x:Class="Lab04_5.Editor.MainWindow"
+﻿<Window x:Class="Lab06.Editor.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Lab04_5.Editor"
+        xmlns:local="clr-namespace:Lab06.Editor"
         mc:Ignorable="d"
-        Title="Текстовый редактор" AllowDrop="True" Height="550" Width="700" Icon="Resources/icons8-video-editing-50.png">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/Language_EN.xaml"/>
-                <ResourceDictionary Source="/Resources/Styles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+        Title="Текстовый редактор" AllowDrop="True" Height="550" Width="800" Icon="Resources/icons8-video-editing-50.png" Style="{DynamicResource WindowStyle}">
    <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
         <CommandBinding Command="ApplicationCommands.Save" Executed="Save_Executed" />
@@ -21,7 +13,7 @@
         <CommandBinding Command="ApplicationCommands.Close" Executed="Close_Executed" />
     </Window.CommandBindings>
  
-    <Grid Style="{StaticResource SweetDracula}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
             <RowDefinition Height="*"/>
@@ -29,13 +21,13 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" >
-            <Menu Style="{StaticResource SweetDracula}">
+            <Menu Style="{DynamicResource MenuStyle}">
                 <MenuItem Header="{DynamicResource _File}" x:Name="File">
                     <MenuItem Header="{DynamicResource _New}" Command="ApplicationCommands.New"/>
                     <MenuItem Header="{DynamicResource _Open}"  Command="ApplicationCommands.Open"/>
                     <MenuItem Header="{DynamicResource _Save}" Command="ApplicationCommands.Save"/>
                     <Separator/>
-                    <MenuItem Header="{DynamicResource _RecentFiles}" x:Name="recentFiles" Style="{DynamicResource MenuItemItemStyle}"/>
+                    <MenuItem Header="{DynamicResource _RecentFiles}" x:Name="recentFiles" />
                     <Separator />
                     <MenuItem Header="{DynamicResource _Close}" Command="ApplicationCommands.Close"/>
                 </MenuItem>
@@ -54,38 +46,43 @@
                 </MenuItem>
             </Menu>
 
-            <ToolBar x:Name="toolBar" Height="Auto" Style="{StaticResource SweetDracula}">
-                <Button x:Name="_New" ToolTip="New" Command="ApplicationCommands.New" Style="{StaticResource SweetDracula}">
-                    <Image Source="Resources/icons8-new-50.png" Width="28" Height="28"/>
+            <ToolBar x:Name="toolBar" Height="Auto" Style="{DynamicResource ToolBarStyle}">
+                <Button x:Name="_New" ToolTip="New" Command="ApplicationCommands.New" Style="{DynamicResource ButtonStyle}">
+                    <Image Name="imgNew" Source="Resources/icons8-new-50.png" Width="28" Height="28"/>
                 </Button>
-                <Button x:Name="_Open" ToolTip="Open" Command="ApplicationCommands.Open" Style="{StaticResource SweetDracula}">
-                    <Image Source="Resources/icons8-opened-folder-50.png" Width="28" Height="28"/>
+                <Button x:Name="_Open" ToolTip="Open" Command="ApplicationCommands.Open" Style="{DynamicResource ButtonStyle}">
+                    <Image Name="imgOpen" Source="Resources/icons8-open-50.png" Width="28" Height="28"/>
                 </Button>
-                <Button x:Name="_Save" ToolTip="Save" Command="ApplicationCommands.Save" Style="{StaticResource SweetDracula}">
-                    <Image Source="Resources/icons8-save-as-50.png" Width="28" Height="28" />
+                <Button x:Name="_Save" ToolTip="Save" Command="ApplicationCommands.Save" Style="{DynamicResource ButtonStyle}">
+                    <Image Name="imgSave" Source="Resources/icons8-save-50.png" Width="28" Height="28" />
                 </Button>
-                <Separator />
-                <ToggleButton Command="EditingCommands.ToggleBold" Name="btnBold" Style="{StaticResource SweetDracula}">
-                    <Image Source="Resources/icons8-bold-filled-50.png" Width="28" Height="28" />
+                <Separator Margin="5"/>
+                <ToggleButton Command="EditingCommands.ToggleBold" Name="btnBold" Style="{DynamicResource ToggleButtonStyle}">
+                    <Image Name="imgBold" Source="Resources/icons8-bold-50.png" Width="28" Height="28" />
                 </ToggleButton>
-                <ToggleButton Command="EditingCommands.ToggleItalic" Name="btnItalic" Style="{StaticResource SweetDracula}">
-                    <Image Source="Resources/icons8-italic-filled-50.png" Width="28" Height="28" />
+                <ToggleButton Command="EditingCommands.ToggleItalic" Name="btnItalic" Style="{DynamicResource ToggleButtonStyle}">
+                    <Image Name="imgItalic" Source="Resources/icons8-italic-50.png" Width="28" Height="28" />
                 </ToggleButton>
-                <ToggleButton Command="EditingCommands.ToggleUnderline" Name="btnUnderline" Style="{StaticResource SweetDracula}">
-                    <Image Source="Resources/icons8-underline-filled-50.png" Width="28" Height="28" />
+                <ToggleButton Command="EditingCommands.ToggleUnderline" Name="btnUnderline" Style="{DynamicResource ToggleButtonStyle}">
+                    <Image Name="imgUnderline" Source="Resources/icons8-underline-50.png" Width="28" Height="28" />
                 </ToggleButton>
-                <Separator />
-                <Border Style="{StaticResource SweetDracula}">
-                    <ComboBox Name="cmbFontFamily" Width="200" FontSize="18" VerticalContentAlignment="Center" Height="28" Style="{StaticResource SweetDracula}" SelectionChanged="CmbFontFamily_SelectionChanged"/>
+                <Separator Margin="5"/>
+                <Border>
+                    <ComboBox Name="cmbFontFamily" MinWidth="170" FontSize="16" Height="28" Style="{DynamicResource ComboBoxStyle}" ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="CmbFontFamily_SelectionChanged"/>
                 </Border>
-                <Slider x:Name="sldFontSize" Value="16" Minimum="4" Maximum="72" Width="100" 
+                <Slider x:Name="sldFontSize" Value="16" Minimum="4" Maximum="72" MinWidth="100" 
                         ValueChanged="SldFontSize_ValueChanged" IsSnapToTickEnabled="True" 
-                        TickFrequency="2" TickPlacement="Both" Style="{StaticResource SweetDracula}" />
-                <Label Content="{Binding ElementName=sldFontSize, Path=Value}" Style="{StaticResource SweetDracula}"/>
+                        TickFrequency="2" TickPlacement="Both" Style="{DynamicResource SliderStyle}"/>
+                <Label Content="{Binding ElementName=sldFontSize, Path=Value}" Style="{DynamicResource LabelStyle}"/>
+                <Separator Margin="5"/>
+                <Label VerticalAlignment="Center" Content="{DynamicResource _Theme}"/>
+                <Border>
+                    <ComboBox x:Name="Theme" MinWidth="170" FontSize="16" Height="28" Style="{DynamicResource ComboBoxStyle}" ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" SelectionChanged="Theme_SelectionChanged" BorderBrush="#FFEAEA07" />
+                </Border>
             </ToolBar>
         </StackPanel>
 
-        <RichTextBox x:Name="rtbEditor" Grid.Row="1" Style="{StaticResource SweetDracula}" TextChanged="RtbEditor_TextChanged"  AllowDrop="True" SelectionChanged="RtbEditor_SelectionChanged" Cursor="Pen">
+        <RichTextBox x:Name="rtbEditor" Grid.Row="1" Style="{DynamicResource RichTextBoxStyle}" TextChanged="RtbEditor_TextChanged"  AllowDrop="True" SelectionChanged="RtbEditor_SelectionChanged" Cursor="Pen">
             <RichTextBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{DynamicResource _Cut}" Command="Cut"/>
@@ -106,15 +103,15 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2.5*"/>
             </Grid.ColumnDefinitions>
-            <StatusBar Grid.Column="0" Style="{StaticResource SweetDracula}">
-                <Label Content="{DynamicResource _Scale}" Style="{StaticResource SweetDracula}"/>
-                <Slider x:Name="zoom" Minimum="0.3" Maximum="5" Value="1" Width="100" Style="{StaticResource SweetDracula}"/>
+            <StatusBar Grid.Column="0" Style="{DynamicResource StatusBarStyle}">
+                <Label Content="{DynamicResource _Scale}" Style="{DynamicResource LabelStyle}"/>
+                <Slider x:Name="zoom" Minimum="0.3" Maximum="5" Value="1" Width="100" Style="{DynamicResource SliderStyle}"/>
             </StatusBar>
-            <StatusBar Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource SweetDracula}">
-                <Label Content="{DynamicResource _Symbols}" Style="{StaticResource SweetDracula}"/>
-                <Label Name="status1" Style="{StaticResource SweetDracula}" />
-                <Label Content="{DynamicResource _Words}" Style="{StaticResource SweetDracula}"/>
-                <Label Name="status2" Style="{StaticResource SweetDracula}" />
+            <StatusBar Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource StatusBarStyle}">
+                <Label Content="{DynamicResource _Symbols}" Style="{StaticResource LabelStyle}"/>
+                <Label Name="status1" Style="{StaticResource LabelStyle}" />
+                <Label Content="{DynamicResource _Words}" Style="{StaticResource LabelStyle}"/>
+                <Label Name="status2" Style="{StaticResource LabelStyle}" />
             </StatusBar>
          </Grid>
     </Grid>

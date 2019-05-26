@@ -29,5 +29,6 @@
     <v:String x:Key="_Words">Количество слов:</v:String>
 
     <v:String x:Key="_Scale">масштаб:</v:String>
+    <v:String x:Key="_Theme">Тема</v:String>
 
  </ResourceDictionary>

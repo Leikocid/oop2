@@ -8,8 +8,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Windows.Media.Imaging;
 
-namespace Lab04_5.Editor {
+namespace Lab06.Editor {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -19,6 +21,8 @@ namespace Lab04_5.Editor {
             cmbFontFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
             rtbEditor.AddHandler(RichTextBox.DragOverEvent, new DragEventHandler(RtbEditor_Drag), true);
             rtbEditor.AddHandler(RichTextBox.DropEvent, new DragEventHandler(RtbEditor_Drop), true);
+            Theme.ItemsSource = new List<string> { "Light", "Dark", "CuteDracula" };
+            Theme.SelectedItem = "CuteDracula";
 
             InitializeNew();
         }
@@ -219,6 +223,28 @@ namespace Lab04_5.Editor {
             cmbFontFamily.SelectedItem = temp;
             temp = rtbEditor.Selection.GetPropertyValue(Inline.FontSizeProperty);
             sldFontSize.Value = Convert.ToInt32(temp);
+        }
+
+        private void Theme_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            string style = Theme.SelectedItem as string;
+            var uri = new Uri("resources/Theme." + style + ".xaml", UriKind.Relative);
+            if (style == "Dark") {
+                imgNew.Source = new BitmapImage(new Uri("Resources/icons8-new-50-dark.png", UriKind.Relative));
+                imgOpen.Source = new BitmapImage(new Uri("Resources/icons8-open-50-dark.png", UriKind.Relative));
+                imgSave.Source = new BitmapImage(new Uri("Resources/icons8-save-50-dark.png", UriKind.Relative));
+                imgBold.Source = new BitmapImage(new Uri("Resources/icons8-bold-50-dark.png", UriKind.Relative));
+                imgItalic.Source = new BitmapImage(new Uri("Resources/icons8-italic-50-dark.png", UriKind.Relative));
+                imgUnderline.Source = new BitmapImage(new Uri("Resources/icons8-underline-50-dark.png", UriKind.Relative));
+           } else {
+                imgNew.Source = new BitmapImage(new Uri("Resources/icons8-new-50.png", UriKind.Relative));
+                imgOpen.Source = new BitmapImage(new Uri("Resources/icons8-open-50.png", UriKind.Relative));
+                imgSave.Source = new BitmapImage(new Uri("Resources/icons8-save-50.png", UriKind.Relative));
+                imgBold.Source = new BitmapImage(new Uri("Resources/icons8-bold-50.png", UriKind.Relative));
+                imgItalic.Source = new BitmapImage(new Uri("Resources/icons8-italic-50.png", UriKind.Relative));
+                imgUnderline.Source = new BitmapImage(new Uri("Resources/icons8-underline-50.png", UriKind.Relative));
+            }
+            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
         }
     }
 }
