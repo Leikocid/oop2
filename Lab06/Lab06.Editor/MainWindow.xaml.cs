@@ -1,14 +1,15 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 
 namespace Lab06.Editor {
@@ -16,14 +17,23 @@ namespace Lab06.Editor {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+
+        private const String RECENT_FILES_FILENAME = "recent-files.txt";
+
+        private List<String> recentList = new List<string>();
+
         public MainWindow() {
             InitializeComponent();
+
+            recentList = LoadRecentFiles().Take(10).ToList();
+            ReloadRecentMenu();
+
             cmbFontFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
             rtbEditor.AddHandler(RichTextBox.DragOverEvent, new DragEventHandler(RtbEditor_Drag), true);
             rtbEditor.AddHandler(RichTextBox.DropEvent, new DragEventHandler(RtbEditor_Drop), true);
             rtbEditor.Focus();
             Theme.ItemsSource = new List<string> { "Light", "Dark", "CuteDracula" };
-            Theme.SelectedItem = "Dark";
+            Theme.SelectedItem = "Light";
 
             InitializeNew();
         }
@@ -61,21 +71,7 @@ namespace Lab06.Editor {
                 };
                 dlg.Filter = "Text Files (*.txt)|*.txt|Rich Text Format (*.rtf)|*.rtf|XAML Files (*.html)|*.html|All files (*.*)|*.*";
                 if (dlg.ShowDialog() == true) {
-                    TextRange range = new TextRange(rtbEditor.Document.ContentStart, rtbEditor.Document.ContentEnd);
-                    using (FileStream fs = new FileStream(dlg.FileName, FileMode.Open)) {
-                        switch (System.IO.Path.GetExtension(dlg.FileName).ToLower()) {
-                            case ".rtf":
-                                range.Load(fs, DataFormats.Rtf);
-                                break;
-                            case ".html":
-                                range.Load(fs, DataFormats.Html);
-                                break;
-                            default:
-                                range.Load(fs, DataFormats.Text);
-                                break;
-                        }
-                        this.Title = "Текстовый редактор (" + dlg.FileName + ")";
-                    }
+                    LoadFile(dlg.FileName);
                 }
             } catch (Exception ex) {
                 MessageBox.Show("Ошибка открытия файла: " + ex.Message);
@@ -104,6 +100,7 @@ namespace Lab06.Editor {
                         }
                     }
                     this.Title = "Текстовый редактор (" + dlg.FileName + ")";
+                    RegisterRecentFile(dlg.FileName);
                 }
             } catch (Exception ex) {
                 MessageBox.Show("Ошибка сохранения файла: " + ex.Message);
@@ -172,7 +169,7 @@ namespace Lab06.Editor {
 
         private string GetLength2(RichTextBox rtb) {
             string textRange = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd).Text;
-            return (Regex.Split(textRange, "\\w+").Count()-1).ToString();
+            return (Regex.Split(textRange, "\\w+").Count() - 1).ToString();
         }
 
 
@@ -190,15 +187,7 @@ namespace Lab06.Editor {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
                 string[] docPath = (string[])e.Data.GetData(DataFormats.FileDrop);
                 if (System.IO.File.Exists(docPath[0])) {
-                    try {
-                        TextRange range = new TextRange(this.rtbEditor.Document.ContentStart, this.rtbEditor.Document.ContentEnd);
-                        FileStream fStream = new FileStream(docPath[0], FileMode.OpenOrCreate);
-                        range.Load(fStream, DataFormats.Rtf);
-                        fStream.Close();
-                        this.Title = "Text Editor (" + docPath[0] + ") ";
-                    } catch (Exception) {
-                        MessageBox.Show("File could not be opened. Make sure the file is a text file.");
-                    }
+                    LoadFile(docPath[0]);
                 }
             }
         }
@@ -250,6 +239,90 @@ namespace Lab06.Editor {
             }
             ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
             Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+        }
+
+        private List<string> LoadRecentFiles() {
+            List<string> files = new List<string>();
+            try {
+                if (System.IO.File.Exists(RECENT_FILES_FILENAME)) {
+                    using (StreamReader sr = new StreamReader(RECENT_FILES_FILENAME, Encoding.UTF8)) {
+                        string fileName;
+                        for (int i = 0; (fileName = sr.ReadLine()) != null; i++) {
+                            if (!files.Contains(fileName)) {
+                                files.Add(fileName);
+                            }
+                        }
+                    }
+                }
+            } catch (Exception exp) {
+                MessageBox.Show(exp.Message);
+            }
+            return files;
+        }
+
+        private void ReloadRecentMenu() {
+            recentFiles.Items.Clear();
+            for (int i = recentList.Count - 1;  i >= 0; i--) {
+                MenuItem newItem = new MenuItem();
+                newItem.Header = recentList[i];
+                newItem.Click += LoadRecentFile;
+                recentFiles.Items.Add(newItem);
+            }
+        }
+
+        private void LoadRecentFile(object sender, RoutedEventArgs e) {
+            MenuItem item = (MenuItem)sender;
+            String fileName = item.Header.ToString();
+            LoadFile(fileName);
+        }
+
+        private void LoadFile(String fileName) {
+            try {
+                TextRange range = new TextRange(rtbEditor.Document.ContentStart, rtbEditor.Document.ContentEnd);
+                using (FileStream fs = new FileStream(fileName, FileMode.Open)) {
+                    switch (System.IO.Path.GetExtension(fileName).ToLower()) {
+                        case ".rtf":
+                            range.Load(fs, DataFormats.Rtf);
+                            break;
+                        case ".html":
+                            range.Load(fs, DataFormats.Html);
+                            break;
+                        default:
+                            range.Load(fs, DataFormats.Text);
+                            break;
+                    }
+                    this.Title = "Текстовый редактор (" + fileName + ")";
+                }
+            } catch (Exception) {
+                MessageBox.Show("File could not be opened. Make sure the file is a text file.");
+            }
+
+            RegisterRecentFile(fileName);
+        }
+
+        private void RegisterRecentFile(String fileName) {
+            int oldIndex = recentList.IndexOf(fileName);
+            if (oldIndex != -1) {
+                recentList.RemoveAt(oldIndex);
+            }
+            recentList.Add(fileName);
+            if (recentList.Count > 10) {
+                recentList.RemoveAt(0);
+            }
+            SaveRecentFiles(recentList);
+            ReloadRecentMenu();
+        }
+
+        private void SaveRecentFiles(List<string> recentList) {
+            try {
+                using (StreamWriter sw = new StreamWriter(RECENT_FILES_FILENAME, false, Encoding.UTF8)) {
+                    foreach (string i in recentList) {
+                        sw.WriteLine(i);
+                    }
+                }
+            } catch (Exception exp) {
+                MessageBox.Show(exp.Message);
+            }
         }
     }
 }
