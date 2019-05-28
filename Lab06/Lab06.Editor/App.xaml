@@ -7,11 +7,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Language_EN.xaml"/>
-                <ResourceDictionary Source="/Resources/Theme.CuteDracula.xaml"/>
-                <!--
-                <ResourceDictionary Source="/resources/Template.xaml"/>
-                -->
-            </ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/Theme.CuteDracula.xaml"/>
+             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

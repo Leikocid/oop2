@@ -108,4 +108,13 @@
     <Setter Property="Background" Value="Black"/>
     <Setter Property="Foreground" Value="LightGray"/>
   </Style>
+
+  <Style x:Key="CustomControlStyle" TargetType="local:CustomControl">
+    <Setter Property="Background" Value="Black"/>
+    <Setter Property="Foreground" Value="Black"/>
+    <Setter Property="BorderBrush" Value="LightGray"/>
+    <Setter Property="FontFamily" Value="Verdana"/>
+    <Setter Property="FontSize" Value="16"/>
+  </Style>
+  
 </ResourceDictionary>

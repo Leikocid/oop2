@@ -33,7 +33,7 @@ namespace Lab06.Editor {
             rtbEditor.AddHandler(RichTextBox.DropEvent, new DragEventHandler(RtbEditor_Drop), true);
             rtbEditor.Focus();
             Theme.ItemsSource = new List<string> { "Light", "Dark", "CuteDracula" };
-            Theme.SelectedItem = "Light";
+            Theme.SelectedItem = "Dark";
 
             InitializeNew();
         }
@@ -217,7 +217,10 @@ namespace Lab06.Editor {
 
         private void Theme_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             string style = Theme.SelectedItem as string;
-            var uri = new Uri("resources/Theme." + style + ".xaml", UriKind.Relative);
+            var uri = new Uri("Themes/Theme." + style + ".xaml", UriKind.Relative);
+            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+
             if (style == "Dark") {
                 imgNew.Source = new BitmapImage(new Uri("Resources/icons8-new-50-dark.png", UriKind.Relative));
                 imgOpen.Source = new BitmapImage(new Uri("Resources/icons8-open-50-dark.png", UriKind.Relative));
@@ -237,8 +240,6 @@ namespace Lab06.Editor {
                 imgUndo.Source = new BitmapImage(new Uri("Resources/icons8-undo-50.png", UriKind.Relative));
                 imgRedo.Source = new BitmapImage(new Uri("Resources/icons8-redo-50.png", UriKind.Relative));
             }
-            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
-            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
         }
 
         private List<string> LoadRecentFiles() {
@@ -263,8 +264,9 @@ namespace Lab06.Editor {
         private void ReloadRecentMenu() {
             recentFiles.Items.Clear();
             for (int i = recentList.Count - 1;  i >= 0; i--) {
-                MenuItem newItem = new MenuItem();
-                newItem.Header = recentList[i];
+                MenuItem newItem = new MenuItem {
+                    Header = recentList[i]
+                };
                 newItem.Click += LoadRecentFile;
                 recentFiles.Items.Add(newItem);
             }

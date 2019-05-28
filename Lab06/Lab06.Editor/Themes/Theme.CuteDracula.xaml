@@ -21,6 +21,15 @@
     <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="FontFamily" Value="Verdana"/>
         <Setter Property="Foreground" Value="BlueViolet"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}" Margin="3">
+                        <ContentPresenter/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Background">
             <Setter.Value>
                 <RadialGradientBrush>
@@ -29,17 +38,7 @@
                 </RadialGradientBrush>
             </Setter.Value>
         </Setter>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid Background="{TemplateBinding Background}" Margin="3">
-                        <ContentPresenter />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
         <Style.Triggers>
-
             <Trigger Property="IsMouseOver" Value="True">
                 <Trigger.EnterActions>
                     <BeginStoryboard>
@@ -142,5 +141,14 @@
         <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="BlueViolet"/>
     </Style>
+
+    <Style x:Key="CustomControlStyle" TargetType="local:CustomControl">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="FontFamily" Value="Verdana"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
 
 </ResourceDictionary>
