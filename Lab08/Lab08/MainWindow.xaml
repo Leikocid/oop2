@@ -48,6 +48,5 @@
             <TextBox Name="txtSql"  Height="125" Width="570" Margin="10" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
             <Button Name="btnRun" Content="Run" Width="65" Height="25" Background="LightGray" Click="BtnRun_Click" />
         </StackPanel>
-
     </StackPanel>
 </Window>

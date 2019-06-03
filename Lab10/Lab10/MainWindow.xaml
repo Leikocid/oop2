@@ -1,0 +1,46 @@
+﻿<Window x:Class="Lab10.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab10"
+        mc:Ignorable="d"
+        Title="Компьютеры на складе" Height="600" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+            <TextBlock DockPanel.Dock="Top" Text="Процессора:" Margin="10"/>
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="10">
+                <Button Name="btnDeleteProc" Content="Delete" Click="BtnDeleteProc_Click"/>
+            </StackPanel>
+            <DataGrid Name="dgProcessors" Margin="10" SelectionChanged="DgProcessors_SelectionChanged" InitializingNewItem="DgProcessors_InitializingNewItem">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Идентификатор" Width="120*"/>
+                    <DataGridTextColumn Binding="{Binding Developer}" Header="Производитель" Width="200*"/>
+                    <DataGridTextColumn Binding="{Binding Model}" Header="Модель" Width="200*"/>
+                    <DataGridTextColumn Binding="{Binding CoresCount}" Header="Количествово ядер" Width="120*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+        <DockPanel Grid.Row="1">
+            <Separator DockPanel.Dock="Top" Margin="10"/>
+            <TextBlock DockPanel.Dock="Top" Text="Компьютеры:" Margin="10"/>
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="10">
+                <Button Name="btnDeleteComp" Content="Delete" Margin="10" Click="BtnDeleteComp_Click"/>
+                <Button Name="btnSave" Content="Save" Margin="10" Click="BtnSave_Click"/>
+           </StackPanel>
+            <DataGrid x:Name="dgComputers" Margin="10" InitializingNewItem="DgComputers_InitializingNewItem">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Идентификатор" Width="120*"/>
+                    <DataGridTextColumn Binding="{Binding Type}" Header="Тип" Width="100*"/>
+                    <DataGridTextColumn Binding="{Binding MemorySize}" Header="Размер ОЗУ" Width="80*"/>
+                    <DataGridTextColumn Binding="{Binding VideoCard}" Header="Видеокарта" Width="100*"/>
+                    <DataGridTextColumn Binding="{Binding DiskSize}" Header="Размер диска" Width="100*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</Window>
