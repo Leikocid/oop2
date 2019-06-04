@@ -1,0 +1,58 @@
+﻿<Window x:Class="Lab11.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab11"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
+    <DockPanel Margin="10">
+        <DockPanel DockPanel.Dock="Top" Margin="10,0,10,0">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                <TextBlock Text="Id:"></TextBlock>
+                <TextBox Width="80" Margin="10" Text="{Binding FilterId, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Name="btnFindById" Content="Find" Margin="10" Command="{Binding FindByIdCommand}"></Button>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <TextBlock Text="Производитель:"></TextBlock>
+                <TextBox Width="120" Margin="10" Text="{Binding FilterDev, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="Количество ядер:"></TextBlock>
+                <TextBox Width="80" Margin="10" Text="{Binding FilterCores, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Margin="10" Content="Find" Command="{Binding FindByDevСommand}"/>
+            </StackPanel>
+            <Rectangle VerticalAlignment="Stretch" Width="0" Stroke="Black"></Rectangle>
+        </DockPanel>
+        <Separator DockPanel.Dock="Top"></Separator>
+        <StackPanel DockPanel.Dock="Bottom">
+            <Separator></Separator>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="New" Margin="10" Command="{Binding NewСommand}"></Button>
+                <Button Content="Modify" Margin="10" Command="{Binding EditСommand}" CommandParameter="{Binding ElementName=grdProcessors, Path=SelectedItem}"></Button>
+                <Button Content="Delete" Margin="10" Command="{Binding DeleteСommand}" CommandParameter="{Binding ElementName=grdProcessors, Path=SelectedItem}"></Button>
+            </StackPanel>
+            <Separator></Separator>
+            <DataGrid Margin="10" Height="44" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
+                      ItemsSource="{Binding EditProcessor}" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" IsReadOnly="True" Header="Идентификатор" Width="110"/>
+                    <DataGridTextColumn Binding="{Binding Developer}" Header="Производитель" Width="2*"/>
+                    <DataGridTextColumn Binding="{Binding Model}" Header="Модель" Width="2*"/>
+                    <DataGridTextColumn Binding="{Binding CoresCount}" Header="Количествово ядер" Width="130"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Separator></Separator>
+            <DockPanel>
+                <Button DockPanel.Dock="Left" Content="Save" Margin="10" Command="{Binding SaveСommand}"></Button>
+                <TextBlock Text="{Binding Status}"></TextBlock>
+            </DockPanel>
+        </StackPanel>
+        <DataGrid Name="grdProcessors" Margin="10" IsReadOnly="True" ItemsSource="{Binding Processors}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Идентификатор" Width="110"/>
+                <DataGridTextColumn Binding="{Binding Developer}" Header="Производитель" Width="2*"/>
+                <DataGridTextColumn Binding="{Binding Model}" Header="Модель" Width="2*"/>
+                <DataGridTextColumn Binding="{Binding CoresCount}" Header="Количествово ядер" Width="130"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Window>
