@@ -9,16 +9,13 @@ namespace Lab14.Model {
     class Tree : Shape, ICloneable, IHasDescriprion {
 
         public Tree() {
-            Levels = 6;
-            TrunkFactor = 0.3;
-            BranchFactor = 0.65;
-            DeltaAngle = 15;
+            Stretch = Stretch.Fill;
         }
 
-        public int Levels { get; set; }                 // количество уровней ветвистости
-        public double TrunkFactor { get; set; }         // относительная длина ствола
-        public double BranchFactor { get; set; }        // как быстро укорачиваются ветки
-        public int DeltaAngle { get; set; }             // отклонение в градусах для последующих веток
+        public int Levels { get; set; } = 6;               // количество уровней ветвистости
+        public double TrunkFactor { get; set; } = 0.3;     // относительная длина ствола
+        public double BranchFactor { get; set; } = 0.65;   // как быстро укорачиваются ветки
+        public int DeltaAngle { get; set; } = 15;          // отклонение в градусах для последующих веток
 
         protected override Geometry DefiningGeometry {
             get {
@@ -44,16 +41,19 @@ namespace Lab14.Model {
 
             Logger.Log("Прототип: Создание копии дерева");
 
-            return new Tree() {
-                Height = this.Height,
-                Width = this.Width,
-                Fill = this.Fill,
-                Stroke = this.Stroke,
-                Levels = this.Levels,
-                TrunkFactor = this.TrunkFactor,
-                BranchFactor = this.BranchFactor,
-                DeltaAngle = this.DeltaAngle
-            };
+            Tree copy = new Tree() { };
+            // копируем параметры
+            copy.Height = this.Height;
+            copy.Width = this.Width;
+            copy.Fill = this.Fill;
+            copy.Stroke = this.Stroke;
+            copy.Levels = this.Levels;
+            copy.Stretch = this.Stretch;
+            copy.TrunkFactor = this.TrunkFactor;
+            copy.BranchFactor = this.BranchFactor;
+            copy.DeltaAngle = this.DeltaAngle;
+
+            return copy;
         }
 
         public string GetDescription() {

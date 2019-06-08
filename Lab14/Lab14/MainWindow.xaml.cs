@@ -65,11 +65,8 @@ namespace Lab14 {
 
             for (int j = 0; j < 2; j++) {
                 left += tree.Width * 0.5;
-                top += tree.Height * 0;
 
                 Tree copy = (tree as Tree).Clone() as Tree; // копия
-                copy.Height = copy.Height * 1;
-                copy.Width = copy.Width * 0.8;
                 copy.Stroke = Brushes.Green;
                 AddToCanvas(copy, left, top);
             }
@@ -97,14 +94,14 @@ namespace Lab14 {
             background.AddComponent(new ShapeComponent("page", 3, 3, new Rectangle() { Fill = Brushes.White, Width = 200, Height = 200 }));
             picture.AddComponent(background);
 
-            Composite bushes = new Composite("bushes", 0, 150);
-            bushes.AddComponent(new ShapeComponent("bush_1", 0, 0, new Tree() { Stroke = Brushes.LightGreen, Width = 100, Height = 50, Levels = 8, StrokeThickness = 2, TrunkFactor = 0.2, BranchFactor = 0.9 }));
-            bushes.AddComponent(new ShapeComponent("bush_2", 40, 0, new Tree() { Stroke = Brushes.Green, Width = 100, Height = 50, Levels = 8, StrokeThickness = 2, TrunkFactor = 0.2, BranchFactor = 0.9 }));
-            bushes.AddComponent(new ShapeComponent("bush_3", 80, 0, new Tree() { Stroke = Brushes.LightGreen, Width = 100, Height = 50, Levels = 8, StrokeThickness = 2, TrunkFactor = 0.2, BranchFactor = 0.9 }));
-            bushes.AddComponent(new ShapeComponent("bush_4", 120, 0, new Tree() { Stroke = Brushes.Green, Width = 100, Height = 50, Levels = 8, StrokeThickness = 2, TrunkFactor = 0.2, BranchFactor = 0.9 }));
+            Composite bushes = new Composite("bushes", 0, 154);
+            bushes.AddComponent(new ShapeComponent("bush_1", 10, 0, new Tree() { Stroke = Brushes.LightGreen, Width = 100, Height = 50, Levels = 8, StrokeThickness = 2, TrunkFactor = 0.2, BranchFactor = 0.85 }));
+            bushes.AddComponent(new ShapeComponent("bush_2", 40, 0, new Tree() { Stroke = Brushes.Green, Width = 100, Height = 50, Levels = 8, StrokeThickness = 2, TrunkFactor = 0.2, BranchFactor = 0.85 }));
+            bushes.AddComponent(new ShapeComponent("bush_3", 70, 0, new Tree() { Stroke = Brushes.LightGreen, Width = 100, Height = 50, Levels = 8, StrokeThickness = 2, TrunkFactor = 0.2, BranchFactor = 0.85 }));
+            bushes.AddComponent(new ShapeComponent("bush_4", 100, 0, new Tree() { Stroke = Brushes.Green, Width = 100, Height = 50, Levels = 8, StrokeThickness = 2, TrunkFactor = 0.2, BranchFactor = 0.85 }));
             picture.AddComponent(bushes);
 
-            picture.AddComponent(new ShapeComponent("main_tree", 0, 0, new Tree() { Stroke = Brushes.Blue, Width = 200, Height = 200, Levels = 10, StrokeThickness = 2, TrunkFactor = 0.34, BranchFactor = 0.66, DeltaAngle = 25 }));
+            picture.AddComponent(new ShapeComponent("main_tree", 3, 4, new Tree() { Stroke = Brushes.Blue, Width = 200, Height = 200, Levels = 10, StrokeThickness = 2, TrunkFactor = 0.24, BranchFactor = 0.65, DeltaAngle = 25 }));
 
             picture.Draw(canvas, canvas.ActualWidth * 0.5 - 100, 50);
 
