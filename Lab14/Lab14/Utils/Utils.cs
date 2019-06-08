@@ -11,7 +11,7 @@ namespace Lab14.Utils {
     public class Util {
 
         /// <summary>
-        /// Взщавращает описание объекта. 
+        /// Возвращает описание объекта. 
         /// Использует адаптор ShapeToIDescriprionAdapter
         /// </summary>
         /// <param name="element"></param>
