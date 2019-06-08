@@ -1,0 +1,27 @@
+﻿<Window x:Class="Lab14.CreateParamsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab14"
+        mc:Ignorable="d"
+        Title="Параметры создания объектов" Height="250" Width="200">
+    <StackPanel Background="LightGray">
+        <GroupBox Header="Factory">
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Name="btnWhite" Content="White" Foreground="White" Background="White" IsChecked="True" GroupName="Factory" Margin="10"/>
+                <RadioButton Name="btnCoral" Content="Coral" Foreground="Coral" Background="Coral" GroupName="Factory" Margin="10"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Type">
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Name="btnRectangle" Content="Rectangle" Margin="10" IsChecked="True" GroupName="Type"/>
+                <RadioButton Name="btnEllipse" Content="Ellipse" Margin="10" GroupName="Type"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Count">
+            <Slider Name="sldCount" Minimum="1" Maximum="10" Value="3" Margin="10" SmallChange="1" AutoToolTipPlacement="TopLeft" />
+        </GroupBox>
+        <Button Content="Create" Width="100" Margin="10" Click="Button_Click"/>
+    </StackPanel>
+</Window>
