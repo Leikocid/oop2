@@ -1,0 +1,35 @@
+﻿<Window x:Class="Lab15.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab15"
+        mc:Ignorable="d"
+        Title="Lab15 - паттерны поведения" Height="650" Width="800" Loaded="Window_Loaded" KeyDown="Window_KeyDown">
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="Создать" Click="Button_Click" Margin="10"></Button>
+            <Button Name="btnBuild" Content="Построить" Click="BtnBuild_Click" Margin="10"></Button>
+            <Button Name="btnComposite" Content="Композит" Click="BtnComposite_Click" Margin="10"></Button>
+            <Button Name="btnMemento" Content="Запомнить" Click="BtnMemento_Click" Margin="10"></Button>
+            <Button Name="btnRestore" Content="Восстановить" Click="BtnRestore_Click" Margin="10"></Button>
+        </ToolBar>
+        <StackPanel DockPanel.Dock="Bottom" Margin="5">
+            <TextBlock>Лог</TextBlock>
+            <ScrollViewer VerticalScrollBarVisibility="Auto"  Height="200">
+                <FlowDocumentScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" >
+                    <FlowDocument Name="fdLog" Background="LightSlateGray" Foreground="White" FontSize="12">
+                        <FlowDocument.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </FlowDocument.Resources>
+                    </FlowDocument>
+                </FlowDocumentScrollViewer>
+            </ScrollViewer>
+        </StackPanel>
+        <Border Background="LightGray" Margin="5">
+            <Canvas Name="canvas" ClipToBounds = "True"/>
+        </Border>
+    </DockPanel>
+</Window>
